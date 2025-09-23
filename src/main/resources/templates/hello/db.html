@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- Thymeleafを使うための記述 -->
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<!-- このHTMLファイルのエンコード形式はUTF-8と指定 -->
+		<meta charset="UTF-8"></meta>
+		<!-- このHTMLファイルのタイトルはHelloWorld -->
+		<title>ResponseSample</title>
+	</head>
+	<body>
+		<!-- 見出し1としてHelloResponseDBと表示 -->
+		<h1>HelloResponseDB</h1>
+		<!-- テーブルを生成し、内容は従業員情報を表示 -->
+		<table>
+			<!-- テーブルの行として指定 -->
+			<tr>
+				<!-- １行目　ID -->
+				<td>ID:</td>
+				<!-- コントローラーから受け取ったemployeeのemployeeIdを表示 -->
+				<td th:text="${employee.employeeId}"></td>
+			</tr>
+			<tr>
+				<!-- ２行目　名前 -->
+				<td>名前:</td>
+				<!-- コントローラーから受け取ったemployeeのemployeeNameを表示 -->
+				<td th:text="${employee.employeeName}"></td>
+			</tr>
+			<tr>
+				<!-- ３行目　年齢 -->
+				<td>年齢:</td>
+				<!-- コントローラーから受け取ったemployeeのemployeeAgeを表示 -->
+				<td th:text="${employee.employeeAge}"></td>
+			</tr>
+		</table>
+	</body>
+</html>

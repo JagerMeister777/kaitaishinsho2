@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- Thymeleafを使うための記述 -->
+<html xmlns="http://www.thymeleaf.org">
+	<head>
+		<!-- このHTMLファイルのエンコード形式はUTF-8と指定 -->
+		<meta charset="UTF-8"></meta>
+		<!-- このHTMLファイルのタイトルはHelloWorld -->
+		<title>Hello World</title>
+	</head>
+	<body>
+		<!-- 見出し1としてHelloWorldと表示 -->
+		<h1>Hello World</h1>
+		<!-- submitが押下されると、サーバーのコントローラーの/helloへPOSTでリクエストする -->
+		<form method="post" action="/hello">
+			<!-- text1というname属性でテキストボックスを生成 -->
+			入力:<input type="text" name="text1" />
+			<!-- クリックボタンを生成 -->
+			<input type="submit" value="クリック" />
+		</form>
+		<!-- submitが押下されると、サーバーのコントローラーの/hello/dbへPOSTでリクエストする -->
+		<form method="post" action="/hello/db">
+			<!-- text2というname属性でテキストボックスを生成し、
+			コントローラーからtext2_valueというデータが渡されていれば、テキストボックス内に表示 -->
+			従業員ID:<input type="text" name="text2" th:value="${text2_value}" />
+			<!-- クリックボタンを生成 -->
+			<input type="submit" value="クリック" />
+		</form>
+	</body>
+</html>
