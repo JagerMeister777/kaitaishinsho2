@@ -30,7 +30,7 @@ public class HelloRepository {
 		
 		// 検索実行
 		// ?にidが代入される
-		// jdbcTemplate.queryForMapで第一引数にはSQL文の文字列、第二引数には条件のIDを渡すことで、特定の従業員情報を取得できる
+		// JdbcTemplateクラスのqueryForMapメソッドで第一引数にはSQL文の文字列、第二引数には条件のIDを渡すことで、特定の従業員情報を取得できる
 		Map<String, Object> employee = jdbcTemplate.queryForMap(query, id);
 		
 		// 取得した従業員情報を呼び出し元に返す

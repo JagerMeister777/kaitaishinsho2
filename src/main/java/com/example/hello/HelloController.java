@@ -26,10 +26,10 @@ public class HelloController {
 	// クライアントが"/hello/db"でPOSTリクエストを送信してきた際に、実行されるメソッド
 	@PostMapping("/hello/db")
 	public String postRequest(@RequestParam("text2") String id, Model model) {
-		// 1件検索
+		// 1件検索　HelloServiceクラスのgetEmployeeメソッドを利用して特定の従業員情報を取得
 		Employee employee = service.getEmployee(id);
 		
-		// 検索結果をModelに登録
+		// ModelクラスのaddAttributeメソッドを利用して、検索結果をemployeeというキーでemployeeを追加
 		model.addAttribute("employee", employee);
 		
 		// db.htmlに画面遷移

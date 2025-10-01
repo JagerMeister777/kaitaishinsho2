@@ -20,7 +20,7 @@ public class HelloService {
 	 */
 	public Employee getEmployee(String id) {
 		
-		// HelloRepositoryに定義されているfindByIdメソッドで特定のIDの従業員情報を検索します。
+		// HelloRepositoryクラスに定義されているfindByIdメソッドで特定のIDの従業員情報を検索します。
 		// 検索した情報はMap型で取得できるので、変数mapに代入
 		Map<String, Object> map = repository.findById(id);
 		
