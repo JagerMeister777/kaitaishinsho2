@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.application.service.UserApplicationService;
+import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +44,8 @@ public class SignupController {
 	
 	// クライアントが"/user/signup"でPOSTリクエストを送信してきた際に、実行されるメソッド
 	@PostMapping("/signup")
-	public String postSignup(Model model, Locale locale, @ModelAttribute @Validated SignupForm form, BindingResult bindingResult) {
+	// @Validated バリデーションを有効にする。GroupOrder（カスタムクラス）はバリデーションをシークエンス化することで、全てのシークエンスをクリアしないと、エラーで返され続ける。
+	public String postSignup(Model model, Locale locale, @ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult) {
 		
 		// 入力チェックの結果
 		// BindingResultクラスのhasErrorsメソッドでエラーのあるフィールドがあればtrue

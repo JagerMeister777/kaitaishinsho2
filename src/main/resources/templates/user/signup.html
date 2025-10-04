@@ -23,7 +23,7 @@
 			</div>
 			<!-- パスワード -->
 			<div class="form-group">
-				<label for="password" th:text="#{password}"></label>4yu
+				<label for="password" th:text="#{password}"></label>
 				<!-- th:errorclassはフィールドエラーがあればclassが適用される。is-invalidはbootstrapのclass。 -->
 				<input type="text" class="form-control" th:field="*{password}" th:errorclass="is-invalid"/>
 				<div class="invalid-feedback" th:errors="*{password}"></div>
