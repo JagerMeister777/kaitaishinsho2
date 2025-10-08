@@ -17,45 +17,87 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
+	
+	<!-- 依存関係ライブラリ -->
 	<dependencies>
+		<!-- Repositoryインターフェースを活用して、データベースにアクセスできるようにする -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
+        
+        <!-- データベース操作を容易にするモジュール -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+        
+        <!-- ブラウザ上に動的に内容を表示させたい時に使われるテンプレートエンジン -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        
+        <!-- springbootでwebアプリ開発をする上で必要な依存関係がまとまっているライブラリ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        
+        <!-- 実行時にファイルを編集しても自動的に再起動し、最新の状態に保ってくれるライブラリ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        
+        <!-- 簡単でインストール不要のRDBMSで、インメモリとファイルでデータを一時保存、永続保存ができるライブラリ -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
+        <!-- アノテーションでゲッターやセッターなどを自動生成してくれるライブラリ -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        
+        <!-- テストのためのライブラリ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        
+        <!-- jquery bootstrapを利用するために必要なライブラリ -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+        
+        <!-- bootstrap HTMLの装飾を簡単に行うためのフレームワーク -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.5.3</version>
+        </dependency>
+        
+        <!-- webjars-locator webjarsのバージョンを気にせずに記述することができる -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator</artifactId>
+            <version>0.40</version>
+        </dependency>
+        
+        <!-- validator バリデーションを使うためのライブラリ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 	</dependencies>
 
