@@ -11,14 +11,20 @@
 		<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}" defer></script>
 		<title th:text="#{user.signup.title}"></title>
 	</head>
+	<!-- class 背景を明るい白色にする -->
 	<body class="bg-light">
+		<!-- class フォームに対してサインアップによく使われるテンプレートを適用 -->
 		<form id="signup-form" method="post" action="/user/signup" class="form-signup" th:object="${signupForm}">
+			<!-- class 子要素を中央揃えにする -->
 			<h1 class="text-center" th:text="#{user.signup.title}"></h1>
 			<!-- ユーザーID -->
+			<!-- class フォームの要素に対して適用し、ラベルとインプットタグなどで１項目としてまとめて扱いたい時に使う -->
 			<div class="form-group">
 				<label for="userId" th:text="#{userId}"></label>
-				<!-- th:errorclassはフィールドエラーがあればclassが適用される。is-invalidはbootstrapのclass。 -->
+				<!-- th:errorclassはフィールドエラーがあればclassが適用される。is-invalidはbootstrapのclassでエラーなら赤くなる。 -->
+				<!-- class form-controlはフォームのinputタグによく使われ、角が丸まった良い感じの入力フォームにしてくれる。 -->
 				<input type="text" class="form-control" th:field="*{userId}" th:errorclass="is-invalid"/>
+				<!-- class エラーなら赤くなる。 -->
 				<div class="invalid-feedback" th:errors="*{userId}"></div>
 			</div>
 			<!-- パスワード -->
