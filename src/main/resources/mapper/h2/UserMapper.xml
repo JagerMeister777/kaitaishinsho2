@@ -31,6 +31,9 @@
 		)
 	</insert>
 	
-	
+	<!-- ユーザー複数件取得 -->
+	<select id="findMany" resultType="MUser">
+		select * from m_user
+	</select>
 	
 </mapper>
