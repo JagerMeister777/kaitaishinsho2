@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+	<head>
+		<title>ユーザー一覧</title>
+		<!-- 個別CSS読み込み -->
+		<link rel="stylesheet" th:href="@{/css/user/list.css}">
+	</head>
+	<body>
+		<!-- layout:fragmentでキーを指定し、replaceで設定したHTMLを埋め込む -->
+		<div layout:fragment="content">
+			<!-- class headerはヘッダーとして識別される -->
+			<!-- class border-bottomは指定された要素のborderのbottomに対して、線を引く -->
+			<div class="header border-bottom">
+				<h1 class="h2">ユーザー一覧画面</h1>
+			</div>
+		</div>
+	</body>
+</html>
