@@ -1,0 +1,26 @@
+package com.example.domain.user.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.domain.user.model.MUser;
+import com.example.domain.user.service.UserService;
+import com.example.repository.UserMapper;
+
+@Service
+public class UserServiceImpl implements UserService{
+
+	@Autowired
+	private UserMapper mapper;
+	
+	@Override
+	public void signup(MUser user) {
+		// MUserクラスに@Dataアノテーションが付与されているので、setterが自動生成されている
+		user.setDepartmentId(1); //部署
+		user.setRole("ROLE_GENERAL"); //ロール
+		// UserMapperクラスのinsertOneメソッドでユーザー1件新規登録
+		mapper.insertOne(user);
+	}
+
+	
+}

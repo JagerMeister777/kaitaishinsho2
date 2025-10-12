@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<!--  Mapperとxmlのマッピング -->
+<!-- Javaインターフェースファイルとマッピングすることで、idにメソッド名を指定できる -->
+<mapper namespace="com.example.repository.UserMapper">
+	
+	<!-- ユーザー1件登録 -->
+	<!-- com.example.repository.UserMapperのinsertOneメソッドが呼び出されたらSQLを実行する -->
+	<!-- MUserクラスのフィールドを自動でマッピングできる。#{フィールド名}の形式で指定。 -->
+	<insert id="insertOne">
+		insert into m_user (
+			user_id,
+			password,
+			user_name,
+			birthday,
+			age,
+			gender,
+			department_id,
+			role
+		) values (
+			#{userId},
+			#{password},
+			#{userName},
+			#{birthday},
+			#{age},
+			#{gender},
+			#{departmentId},
+			#{role}
+		)
+	</insert>
+	
+	
+	
+</mapper>

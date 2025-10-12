@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.Locale;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.application.service.UserApplicationService;
+import com.example.domain.user.model.MUser;
+import com.example.domain.user.service.UserService;
 import com.example.form.GroupOrder;
 import com.example.form.SignupForm;
 
@@ -27,6 +30,12 @@ public class SignupController {
 	
 	@Autowired
 	private UserApplicationService userApplicationService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	// クライアントが"/user/signup"でGETリクエストを送信してきた際に、実行されるメソッド
 	@GetMapping("/signup")
@@ -56,6 +65,14 @@ public class SignupController {
 		
 		// Slf4jインターフェースのinfoメソッドを呼び出すと簡単にコンソール画面にログを出すことができる。
 		log.info(form.toString());
+		
+		// formをMUserクラスに変換
+		// ModelMapperクラスのmapメソッドはフィールド名が同じフィールドに値を自動的にコピーすることができる
+		MUser user = modelMapper.map(form, MUser.class);
+		
+		// ユーザー登録
+		// UserServiceクラスのsignupメソッドで入力された情報でユーザーを新規登録する
+		userService.signup(user);
 		
 		// ログイン画面にリダイレクト
 		// リダイレクトをすることで、謝って再度データをリクエストしないようにする（PRGパターン）

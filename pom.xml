@@ -105,6 +105,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+        
+        <!-- MyBatis データベース操作を簡単にSQL文を直接記述することができるフレームワーク -->
+		<dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+        
+        <!-- Model Mapper Javaオブジェクト間でフィールドを自動的にコピーするライブラリ -->
+		<dependency>
+		    <groupId>org.modelmapper.extensions</groupId>
+		    <artifactId>modelmapper-spring</artifactId>
+		    <version>2.3.9</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
