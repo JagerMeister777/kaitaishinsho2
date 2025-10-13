@@ -27,7 +27,7 @@ public class UserDetailController {
 	@GetMapping("/detail/{userId:.+}")
 	public String getUser(UserDetailForm form, Model model, @PathVariable("userId") String userId) {
 		
-		// ユーザーを1件取得
+		// UserServiceクラスのgetUserOneメソッドを使って、ユーザーを1件取得
 		MUser user = userService.getUserOne(userId);
 		
 		// ユーザーのパスワードをnullに設定
@@ -36,6 +36,7 @@ public class UserDetailController {
 		// MUserをformに変換
 		//ModelMapperクラスのmapメソッドはフィールド名が同じフィールドに値を自動的にコピーすることができる
 		form = modelMapper.map(user, UserDetailForm.class);
+		form.setSalaryList(user.getSalaryList());
 		
 		// htmlでuserDetailFormを利用するために、ModelクラスのaddAttributeメソッドを使用して、userDetailFormというキーでmodelに追加
 		model.addAttribute("userDetailForm", form);
@@ -48,7 +49,7 @@ public class UserDetailController {
 	@PostMapping(value = "/detail", params = "update")
 	public String updateUser(UserDetailForm form, Model model) {
 		
-		// ユーザーを更新
+		// UserServiceクラスのupdateUserOneメソッドを使って、ユーザーを更新
 		userService.updateUserOne(form.getUserId(), form.getPassword(), form.getUserName());
 		
 		// ユーザー一覧画面にリダイレクト
@@ -58,7 +59,7 @@ public class UserDetailController {
 	@PostMapping(value = "/detail", params = "delete")
 	public String deleteUser(UserDetailForm form, Model model) {
 		
-		// ユーザーを削除
+		// UserServiceクラスのdeleteUserOneメソッドを使い、ユーザーを削除
 		userService.deleteUserOne(form.getUserId());
 		
 		// ユーザー一覧画面にリダイレクト
