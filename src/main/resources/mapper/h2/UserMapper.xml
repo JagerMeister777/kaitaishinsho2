@@ -46,6 +46,15 @@
 	<!-- ユーザー複数件取得 -->
 	<select id="findMany" resultType="MUser">
 		select * from m_user
+		<!-- ifタグの条件が一つでもtrueならwhere句を追加する -->
+		<where>
+			<if test="userId != null">
+				user_id like '%' || #{userId} || '%'
+			</if>
+			<if test="userName != null">
+				and user_name like '%' || #{userName} || '%'
+			</if>
+		</where>
 	</select>
 	
 	<!-- ユーザー1件検索 -->
