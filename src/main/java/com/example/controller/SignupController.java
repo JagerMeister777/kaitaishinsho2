@@ -5,10 +5,13 @@ import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,16 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user")
 @Slf4j
 public class SignupController {
-	
+
 	@Autowired
 	private UserApplicationService userApplicationService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	// クライアントが"/user/signup"でGETリクエストを送信してきた際に、実行されるメソッド
 	@GetMapping("/signup")
 	// @ModelAttributeを使うことでSignupFormをテンプレートのフォームを紐付けることができ、POSTした際に、バインドされてリクエストが送られる
@@ -46,38 +49,68 @@ public class SignupController {
 		Map<String, Integer> genderMap = userApplicationService.getGenderMap(locale);
 		// htmlでgenderMapを利用するために、ModelクラスのaddAttributeメソッドを使用して、genderMapというキーでmodelに追加
 		model.addAttribute("genderMap", genderMap);
-		
+
 		// ユーザー登録画面に遷移
 		return "user/signup";
 	}
-	
+
 	// クライアントが"/user/signup"でPOSTリクエストを送信してきた際に、実行されるメソッド
 	@PostMapping("/signup")
 	// @Validated バリデーションを有効にする。GroupOrder（カスタムクラス）はバリデーションをシークエンス化することで、全てのシークエンスをクリアしないと、エラーで返され続ける。
 	public String postSignup(Model model, Locale locale, @ModelAttribute @Validated(GroupOrder.class) SignupForm form, BindingResult bindingResult) {
-		
+
 		// 入力チェックの結果
 		// BindingResultクラスのhasErrorsメソッドでエラーのあるフィールドがあればtrue
 		if(bindingResult.hasErrors()) {
 			// NG:ユーザー管理画面に戻ります
 			return getSignup(model, locale, form);
 		}
-		
+
 		// Slf4jインターフェースのinfoメソッドを呼び出すと簡単にコンソール画面にログを出すことができる。
 		log.info(form.toString());
-		
+
 		// formをMUserクラスに変換
 		// ModelMapperクラスのmapメソッドはフィールド名が同じフィールドに値を自動的にコピーすることができる
 		MUser user = modelMapper.map(form, MUser.class);
-		
+
 		// ユーザー登録
 		// UserServiceクラスのsignupメソッドで入力された情報でユーザーを新規登録する
 		userService.signup(user);
-		
+
 		// ログイン画面にリダイレクト
 		// リダイレクトをすることで、謝って再度データをリクエストしないようにする（PRGパターン）
 		// 特に登録や更新、削除の際に利用することでユーザーの誤った操作を行わないようにする
 		return "redirect:/login";
 	}
-	
+
+	/** データベース関連の例外処理 */
+	@ExceptionHandler(DataAccessException.class)
+	public String dataAccessExceptionHandler(DataAccessException e, Model model) {
+
+		// 空文字をセット
+		model.addAttribute("error", "");
+
+		// メッセージをModelに登録
+		model.addAttribute("message", "SignupControllerで例外が発生しました。");
+
+		// HTTPのエラーコード（500）をModelに登録
+		model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
+
+		return "error";
+	}
+
+	/** その他の例外処理 */
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		model.addAttribute("error", "");
+
+		// メッセージをModelに登録
+		model.addAttribute("message", "SignupControllerで例外が発生しました。");
+
+		// HTTPのエラーコード（500）をModelに登録
+		model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR);
+
+		return "error";
+	}
+
 }
