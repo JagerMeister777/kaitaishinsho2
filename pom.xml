@@ -120,6 +120,12 @@
 		    <version>2.3.9</version>
 		</dependency>
 		
+		<!-- AspectJ -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
