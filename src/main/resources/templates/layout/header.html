@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorate="~{layout/layout}">
+	<head>
+	</head>
+	<body>
+		<!-- class navbar-inverseは背景が黒、文字が白になる。 -->
+		<!-- class navbar-fixed-topはナビゲーションバーを常にページの最上部に固定させる -->
+		<!-- class navbar-darkは暗い背景色に対して、文字やアイコンを白くする -->
+		<!-- class bg-darkは要素の背景色を黒に近い暗いグレーに設定できる -->
+		<nav layout:fragment="header" class="navbar navbar-inverse navbar-fixed-top navbar-dark bg-dark">
+			<!-- class container-fluidは横幅が表示領域いっぱいに設定できる -->
+			<div class="container-fluid">
+				<!-- ナビゲーションバーをヘッダーとして定義し、ロゴやサイト名を左寄せにする -->
+				<div class="navbar-header">
+					<!-- ロゴやサイト名を適切に配置し、ブランド要素として設定できる -->
+					<a class="navbar-brand" href="#">SpringSample</a>
+				</div>
+				<form method="post" th:action="@{/logout}">
+					<!-- class btn ボタンとしてよくみる丸みを帯びたボタンの見た目にすることができる -->
+					<!-- class btn-linkはボタンを背景色や下線のないリンクのような見た目にできる。-->
+					<!-- class pull-rightは要素を右寄せにできる -->
+					<button class="btn btn-link pull-right navbar-brand" type="submit">
+						ログアウト
+					</button>
+				</form>
+			</div>
+		</nav>
+	</body>
+</html>
