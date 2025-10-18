@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		// CSRF対策を無効に設定（一時的）
 		// csrfメソッドはリクエストにトークンがないとアクセスできないようにするための設定のON・OFFができる
-		http.csrf().disable();
+		// http.csrf().disable();
 	}
 	
 	@Override
