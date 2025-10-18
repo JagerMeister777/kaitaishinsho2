@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -50,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user/signup").permitAll() // 直リンクOK
 				.anyRequest().authenticated(); // それ以外は直リンクNG
 		
+		// ログイン処理
 		http
 			// HttpSecurityクラスのformLoginメソッドからメソッドチェーンで条件を追加する。
 			.formLogin()
@@ -59,6 +61,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.usernameParameter("userId") // ログインページのユーザーID
 				.passwordParameter("password") // ログインページのパスワード
 				.defaultSuccessUrl("/user/list", true); // 成功時の遷移先
+		
+		// ログアウト処理
+		http
+		// HttpSecurityクラスのlogoutメソッドからメソッドチェーンで条件を追加する。
+			.logout()
+				// 基本的にはログアウト処理はPOSTで送るが、このメソッドはGETでログアウトする時に使うメソッド
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				// ログアウトのリクエスト先パスの設定
+				.logoutUrl("/logout")
+				// ログアウト成功時の遷移先
+				.logoutSuccessUrl("/login?logout");
 		
 		// CSRF対策を無効に設定（一時的）
 		// csrfメソッドはリクエストにトークンがないとアクセスできないようにするための設定のON・OFFができる
