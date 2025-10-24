@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	layout:decorate="~{layout/layout}">
+	layout:decorate="~{layout/layout}"
+	xmlns="http://www.thymeleaf.org/extras/spring-security">
 	<head>
 	</head>
 	<body>
@@ -15,6 +16,11 @@
 				<li role="presentation">
 					<!-- class nav-linkはナビゲーションリンクに適用され、ホバー時の視覚効果やアクティブ状態の表示、レスポンシブデザインでの挙動 -->
 					<a class="nav-link" th:href="@{'/user/list'}">ユーザー一覧</a>
+				</li>
+				<!-- sec:authorize属性は権限により画面に項目を出すかどうかを設定できる -->
+				<!-- xmlns="http://www.thymeleaf.org/extras/spring-security"を追加する必要がある。 -->
+				<li role="presentation"　sec:authorize="hasRole('ADMIN')">
+					<a class="nav-link" th:href="@{'/admin'}">アドミン専用</a>
 				</li>
 			</ul>
 		</div>
